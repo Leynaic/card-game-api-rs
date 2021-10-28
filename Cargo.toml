@@ -1,0 +1,16 @@
+[package]
+name = "jeu-de-carte"
+version = "0.1.0"
+authors = ["Leynaïc Brisse <leynaic.brisse@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "3"
+rand = "0.8.4"
+chrono = "0.4.19"
+uuid = {version = "0.8.2", features = ["serde", "v4"]}
+serde = {version = "1.0.130", features = ["derive"]}
+postgres = {version = "0.19.2", features = ["with-chrono-0_4", "with-uuid-0_8"]}
+dotenv = "0.15.0"
