@@ -1,4 +1,3 @@
-use dotenv::dotenv;
 use std::env;
 use crate::{Card, CardRepresentation};
 
@@ -35,8 +34,6 @@ pub fn get_card(motif: &Card) -> CardRepresentation {
 }
 
 fn get_asset_url() -> String {
-    dotenv().ok();
-
     return env::var("ASSET_URL")
         .expect("ASSET_URL must be set");
 }
