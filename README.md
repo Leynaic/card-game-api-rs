@@ -1,4 +1,7 @@
 # Card Game API
+
+[![Rust](https://github.com/Leynaic/card-game-api-rs/actions/workflows/rust.yml/badge.svg)](https://github.com/Leynaic/card-game-api-rs/actions/workflows/rust.yml)
+
 "Card Game API" is a project made in [Rust](https://www.rust-lang.org/) with [Actix](https://actix.rs/).
 The API allows you to manage a simple card game deck _(shuffle, take a card, put a card back)_.
 
