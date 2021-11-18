@@ -1,12 +1,19 @@
 mod controller;
+use dotenv::dotenv;
+use std::env;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_web::{App, HttpServer, web};
-    use dotenv::dotenv;
     use actix_cors::Cors;
 
     dotenv().ok(); // Load .env file
+
+    let api_host = env::var("HOST")
+        .expect("HOST must be set");
+
+    let api_port = env::var("PORT")
+        .expect("PORT must be set");
 
     HttpServer::new(|| {
         let cors = Cors::default()
@@ -21,7 +28,7 @@ async fn main() -> std::io::Result<()> {
             .route("/cards/{id}/put", web::post().to(controller::put_cards))
             .route("/cards/{id}", web::delete().to(controller::delete_cards))
     })
-        .bind("127.0.0.1:8000")?
+        .bind(&[ api_host, api_port ].join(":"))?
         .run()
         .await
 }
