@@ -93,7 +93,7 @@ impl Deck {
         let at = if length >= self.cards.len() {
             0
         } else {
-            (self.cards.len() + length - 1) % self.cards.len()
+            (self.cards.len() - length) % self.cards.len()
         };
 
         let mut cards: Vec<Card> = self.cards.drain(at..).collect();
@@ -132,7 +132,7 @@ impl Deck {
         let at = if length >= self.discarded.len() {
             0
         } else {
-            (self.discarded.len() + length - 1) % self.discarded.len()
+            (self.discarded.len() - length) % self.discarded.len()
         };
 
         let mut cards: Vec<Card> = self.discarded.drain(at..).collect();
