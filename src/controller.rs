@@ -10,6 +10,11 @@ pub struct DeckSizeRequest {
 }
 
 #[derive(Deserialize)]
+pub struct DeckShuffleRequest {
+    pub shuffle_discarded: Option<bool>,
+}
+
+#[derive(Deserialize)]
 pub struct DeckSwitch {
     pub lifo: Option<bool>,
     pub length: Option<usize>,
@@ -29,7 +34,7 @@ pub async fn post_cards(query: web::Query<DeckSizeRequest>) -> Result<HttpRespon
     Ok(HttpResponse::Created().json(DeckRepresentation::from(deck)))
 }
 
-pub async fn shuffle_cards(req: HttpRequest) -> Result<HttpResponse> {
+pub async fn shuffle_cards(req: HttpRequest, query: web::Query<DeckShuffleRequest>) -> Result<HttpResponse> {
     let deck_id = req.match_info().get("id");
     match deck_id {
         Some(deck_id) => {
@@ -40,7 +45,10 @@ pub async fn shuffle_cards(req: HttpRequest) -> Result<HttpResponse> {
                     let deck = Deck::find_by_id(deck_id, &mut connection);
                     match deck {
                         Some(mut deck) => {
-                            deck.shuffle();
+                            match query.shuffle_discarded {
+                                Some(true) => deck.shuffle(true),
+                                _ => deck.shuffle(false)
+                            }
                             deck.update_db(&mut connection);
                             connection.close().ok();
 

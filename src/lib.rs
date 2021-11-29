@@ -63,9 +63,13 @@ impl Deck {
         Deck { id: Uuid::new_v4(), cards, discarded }
     }
 
-    pub fn shuffle(&mut self) {
+    pub fn shuffle(&mut self, shuffle_discarded: bool) {
         let mut rng = rand::thread_rng();
-        self.cards.shuffle(&mut rng)
+        if shuffle_discarded {
+            self.discarded.shuffle(&mut rng);
+        } else {
+            self.cards.shuffle(&mut rng)
+        }
     }
 
     /// Takes one or more cards of the deck card to put them into the discarded stack.

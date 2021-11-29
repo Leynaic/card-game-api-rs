@@ -22,7 +22,7 @@ mod tests {
 
         assert_eq!(deck.cards, deck_copy.cards);
 
-        deck.shuffle();
+        deck.shuffle(false);
 
         assert_ne!(deck.cards, deck_copy.cards);
     }
