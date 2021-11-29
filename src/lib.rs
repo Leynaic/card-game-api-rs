@@ -17,6 +17,7 @@ type Card = i32;
 #[derive(Serialize)]
 pub struct CardRepresentation {
     pub name: String,
+    pub value: Card,
     pub image: String,
 }
 

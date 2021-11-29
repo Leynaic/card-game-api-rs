@@ -28,12 +28,17 @@ pub fn get_card(motif: &Card) -> CardRepresentation {
     };
 
     let name = format!("{} de {}", card_value, card_color);
-    let image= format!("{}/cards/{}.svg", get_asset_url(), motif + 1);
+    let image= format!("{}{}{}", get_asset_url(), motif, get_asset_extension());
 
-    CardRepresentation { name, image }
+    CardRepresentation { name, image, value: *motif }
 }
 
 fn get_asset_url() -> String {
     return env::var("ASSET_URL")
         .expect("ASSET_URL must be set");
+}
+
+fn get_asset_extension() -> String {
+    return env::var("ASSET_EXTENSION")
+        .expect("ASSET_EXTENSION must be set");
 }
