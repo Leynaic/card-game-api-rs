@@ -1,6 +1,6 @@
 [package]
 name = "jeu-de-carte"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Leynaïc Brisse <leynaic.brisse@gmail.com>"]
 edition = "2018"
 
